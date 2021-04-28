@@ -5,5 +5,5 @@ import com.gm.asm.response.ManageGroupResponse;
 
 public interface ManageGroupI {
 
-     ManageGroupResponse manageGroup(ManageGroupRequest request);
+     String manageGroup(ManageGroupRequest request);
 }

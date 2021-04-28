@@ -3,6 +3,7 @@ package com.gm.asm.service.impl;
 import com.gm.asm.request.AddIdentityRequest;
 import com.gm.asm.service.AddIdentitiesI;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URI;
@@ -10,6 +11,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+@Service
 public class AddIdentityImpl implements AddIdentitiesI {
 
     @Value("${app.add.identity.request.uri}")

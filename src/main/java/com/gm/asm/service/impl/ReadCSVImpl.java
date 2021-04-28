@@ -60,14 +60,13 @@ public class ReadCSVImpl implements ReadCSVService {
 
             Iterable<CSVRecord> csvRecords = csvParser.getRecords();
             for (CSVRecord csvRecord : csvRecords) {
-                ManageGroupRequest getAsmId = new ManageGroupRequest(csvRecord.get("asms_nbr"));
-                ManageGroupResponse asmIdResponse = manageGroupI.manageGroup(getAsmId);
-                String asmId = asmIdResponse.getTeamFoundationId();
+                ManageGroupRequest getAsmId = new ManageGroupRequest(csvRecord.get("Emp_ID"));
+                String asmId = manageGroupI.manageGroup(getAsmId);
 
 
                 ManageGroupRequest getGroupId = new ManageGroupRequest(csvRecord.get("DPG_Groups"));
-                ManageGroupResponse groupIdResponse = manageGroupI.manageGroup(getAsmId);
-                String groupId = groupIdResponse.getTeamFoundationId();
+                String groupId = manageGroupI.manageGroup(getAsmId);
+
 
                 AddIdentityRequest addAsmIdentityRequest = new AddIdentityRequest();
                 addAsmIdentityRequest.setGroupsToJoinJson(asmId);
