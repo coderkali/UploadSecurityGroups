@@ -2,6 +2,7 @@ package com.gm.asm.service.impl;
 
 import com.gm.asm.request.AddIdentityRequest;
 import com.gm.asm.service.AddIdentitiesI;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -21,15 +22,16 @@ public class AddIdentityImpl implements AddIdentitiesI {
     @Override
     public void addIdentity(AddIdentityRequest identityRequest) {
         try {
+            c
+
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(addIdenityUri))
                     .header("Content-Type", "application/json")
                     .header("Authorization", "Basic bmFtXGh6Mmd6OTpBYWJhbkA3ODY3ODY3ODY=")
-                    .method("POST", HttpRequest.BodyPublishers.ofString(identityRequest.toString()))
+                    .method("POST", HttpRequest.BodyPublishers.ofString(identity))
                     .build();
             HttpResponse<String> response = null;
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
