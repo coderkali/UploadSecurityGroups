@@ -4,7 +4,7 @@ import com.gm.asm.response.userid.UserResponse;
 
 public interface UserService {
 
-    UserResponse getUserByUserName(String userName);
+    String getUserByUserName(String userName);
 
 
 }

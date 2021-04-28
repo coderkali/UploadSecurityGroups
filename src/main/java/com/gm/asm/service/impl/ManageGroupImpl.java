@@ -46,8 +46,7 @@ public class ManageGroupImpl implements ManageGroupI {
             HttpResponse<String> response = null;
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
             if(response.statusCode()==500){
-                UserResponse userByUserName = userService.getUserByUserName(manageGroupRequest.getName());
-                userByUserName.getValue().get(0).getId();
+                return userService.getUserByUserName(manageGroupRequest.getName());
             }
             JSONObject jsonObject = new JSONObject(response.body().toString());
             String ids =jsonObject.get("teamFoundationId").toString();

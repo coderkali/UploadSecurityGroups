@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gm.asm.response.userid.UserResponse;
 import com.gm.asm.service.UserService;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,7 @@ public class UserServiceImpl  implements UserService {
 
 
     @Override
-    public UserResponse getUserByUserName(String userName) {
+    public String getUserByUserName(String userName) {
         try{
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(getUserUri+userName))
@@ -33,10 +35,10 @@ public class UserServiceImpl  implements UserService {
                     .method("GET", HttpRequest.BodyPublishers.noBody())
                     .build();
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-            UserResponse userResponse = objectMapper.convertValue(response.body(),UserResponse.class);
-            return userResponse;
+            JSONObject jsonObject = new JSONObject(response.body().toString());
+            JSONArray result = jsonObject.getJSONArray("value");
+            String id = result.getJSONObject(0).get("id").toString();
+            return id;
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

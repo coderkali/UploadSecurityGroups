@@ -75,11 +75,11 @@ public class ReadCSVImpl implements ReadCSVService {
 
 
                 String userId = csvRecord.get("usr_id");
-                UserResponse userResponse =userService.getUserByUserName(userId);
+                String userResponse =userService.getUserByUserName(userId);
 
                 AddIdentityRequest addGroupIdentityRequest = new AddIdentityRequest();
                 addGroupIdentityRequest.setGroupsToJoinJson(groupId);
-                addGroupIdentityRequest.setExistingUsersJson(userResponse.getValue().get(0).getId());
+                addGroupIdentityRequest.setExistingUsersJson(userResponse);
                 addIdentitiesI.addIdentity(addGroupIdentityRequest);
             }
         } catch (Exception e) {
