@@ -7,6 +7,7 @@ import com.gm.asm.response.ManageGroupResponse;
 import com.gm.asm.response.userid.UserResponse;
 import com.gm.asm.service.ManageGroupI;
 import com.gm.asm.service.UserService;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,10 +49,9 @@ public class ManageGroupImpl implements ManageGroupI {
                 UserResponse userByUserName = userService.getUserByUserName(manageGroupRequest.getName());
                 userByUserName.getValue().get(0).getId();
             }
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-            ManageGroupResponse manageGroupResponse = objectMapper.convertValue(response.body(),ManageGroupResponse.class);
-            return manageGroupResponse.getTeamFoundationId();
+            JSONObject jsonObject = new JSONObject(response.body().toString());
+            String ids =jsonObject.get("teamFoundationId").toString();
+            return ids;
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
