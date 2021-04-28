@@ -22,7 +22,12 @@ public class AddIdentityImpl implements AddIdentitiesI {
     @Override
     public void addIdentity(AddIdentityRequest identityRequest) {
         try {
-            c
+            JSONObject obj=new JSONObject();
+            obj.put("newUsersJson","");
+            obj.put("existingUsersJson",identityRequest.getExistingUsersJson());
+            obj.put("groupsToJoinJson",identityRequest.getGroupsToJoinJson());
+            obj.put("aadGroupsJson","");
+            String identity= obj.toString();
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(addIdenityUri))
