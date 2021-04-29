@@ -22,6 +22,9 @@ public class UserServiceImpl  implements UserService {
     private String getUserUri;
 
 
+    @Value("${app.auth.token}")
+    private String appAuthToken;
+
 
     @Override
     public String getUserByUserName(String userName) {
@@ -31,7 +34,7 @@ public class UserServiceImpl  implements UserService {
                     .header("Connection", "keep-alive")
                     .header("Accept", "application/json, text/javascript, */*; q=0.01")
                     .header("Content-Type", "application/json")
-                    .header("Authorization", "Basic bmFtXGh6Mmd6OTpBYWJhbkA3ODY3ODY3ODY=")
+                    .header("Authorization", "Basic "+appAuthToken)
                     .method("GET", HttpRequest.BodyPublishers.noBody())
                     .build();
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());

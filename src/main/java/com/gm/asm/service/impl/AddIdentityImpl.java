@@ -18,6 +18,9 @@ public class AddIdentityImpl implements AddIdentitiesI {
     @Value("${app.add.identity.request.uri}")
     private String addIdenityUri;
 
+    @Value("${app.auth.token}")
+    private String appAuthToken;
+
 
     @Override
     public void addIdentity(AddIdentityRequest identityRequest) {
@@ -32,7 +35,7 @@ public class AddIdentityImpl implements AddIdentitiesI {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(addIdenityUri))
                     .header("Content-Type", "application/json")
-                    .header("Authorization", "Basic bmFtXGh6Mmd6OTpBYWJhbkA3ODY3ODY3ODY=")
+                    .header("Authorization", "Basic "+appAuthToken)
                     .method("POST", HttpRequest.BodyPublishers.ofString(identity))
                     .build();
             HttpResponse<String> response = null;

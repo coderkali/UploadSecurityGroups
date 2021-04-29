@@ -25,6 +25,9 @@ public class ManageGroupImpl implements ManageGroupI {
     @Value("${app.manage.group.request.uri}")
     private String manageGroupUri;
 
+    @Value("${app.auth.token}")
+    private String appAuthToken;
+
     @Autowired
     UserService userService;
 
@@ -40,7 +43,7 @@ public class ManageGroupImpl implements ManageGroupI {
                 .uri(URI.create(manageGroupUri))
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
-                .header("Authorization", "Basic bmFtXGh6Mmd6OTpBYWJhbkA3ODY3ODY3ODY=")
+                .header("Authorization", "Basic "+appAuthToken)
                 .method("POST", HttpRequest.BodyPublishers.ofString(names))
                 .build();
             HttpResponse<String> response = null;
